@@ -58,46 +58,24 @@ button { background: none; border: none; cursor: pointer; color: inherit; font: 
 .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
 .section { padding: var(--section-pad) 0; position: relative; }
 
-/* ── Floating Architectural Decor ──────────────────────────────── */
-.decor {
+/* ── Architectural Doodle Background ──────────────────────────── */
+.has-doodle { isolation: isolate; }
+.has-doodle::after {
+  content: '';
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  z-index: -1;
+  background-image: url('../assets/images/doodle-pattern.svg');
+  background-size: 280px 280px;
+  background-repeat: repeat;
+  opacity: 1;
   pointer-events: none;
-  z-index: 0;
-}
-.decor__el {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--s, 18px);
-  height: var(--s, 18px);
-  color: var(--gold);
-  opacity: 0.05;
-  animation: decorFloat var(--d, 20s) ease-in-out infinite;
-  animation-delay: var(--dl, 0s);
-}
-.decor__el:nth-child(even) {
-  animation-name: decorFloat2;
-}
-.decor__el:nth-child(3n) {
-  animation-name: decorFloat3;
+  animation: doodleDrift 60s linear infinite;
 }
 
-@keyframes decorFloat {
-  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-  25% { transform: translateY(-22px) translateX(10px) rotate(6deg); }
-  50% { transform: translateY(-35px) translateX(-6px) rotate(-3deg); }
-  75% { transform: translateY(-14px) translateX(14px) rotate(4deg); }
-}
-@keyframes decorFloat2 {
-  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-  33% { transform: translateY(16px) translateX(-12px) rotate(-5deg); }
-  66% { transform: translateY(-20px) translateX(10px) rotate(7deg); }
-}
-@keyframes decorFloat3 {
-  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-  50% { transform: translateY(-28px) translateX(6px) rotate(10deg); }
+@keyframes doodleDrift {
+  from { background-position: 0 0; }
+  to { background-position: 280px 280px; }
 }
 
 /* ── Typography ─────────────────────────────────────────────────── */
@@ -421,10 +399,12 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
 }
 .hero__heading {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 8vw, 7.5rem);
+  font-size: clamp(2.8rem, 8vw, 7rem);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.08;
   margin-bottom: 1.5rem;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 .hero__line { display: block; overflow: hidden; }
 .hero__line-inner { display: inline-block; }
@@ -1011,7 +991,7 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
 .team-card__image img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center 20%;
   filter: grayscale(15%) contrast(1.1) brightness(1.05) saturate(1.1);
   transition: filter 0.6s var(--ease-out), transform 0.6s var(--ease-out);
 }
@@ -1309,7 +1289,7 @@ a.footer__link:hover { color: var(--gold); padding-left: 0.5rem; }
    ══════════════════════════════════════════════════════════════════ */
 
 @media (max-width: 639px) {
-  .decor { display: none; }
+  .has-doodle::after { opacity: 0.7; }
 }
 
 @media (min-width: 480px) {
@@ -1381,14 +1361,15 @@ a.footer__link:hover { color: var(--gold); padding-left: 0.5rem; }
   .marquee { animation: none; }
   .whatsapp-float.is-visible { animation: none; }
   .philosophy__char { opacity: 1 !important; }
-  .decor { display: none; }
+  .has-doodle::after { display: none; }
 }
 
 /* ── Print ──────────────────────────────────────────────────────── */
 @media print {
   body { background: #fff; color: #000; }
   .nav, .preloader, .cursor__dot, .cursor__ring, .hero__scroll,
-  .whatsapp-float, .back-to-top, .marquee, .decor { display: none !important; }
+  .whatsapp-float, .back-to-top, .marquee { display: none !important; }
+  .has-doodle::after { display: none !important; }
   .section { padding: 2rem 0; }
   .hero { min-height: auto; }
   .philosophy__char { opacity: 1 !important; }
