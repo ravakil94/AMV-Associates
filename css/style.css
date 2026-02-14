@@ -127,6 +127,69 @@ button { background: none; border: none; cursor: pointer; color: inherit; font: 
 .btn--outline:hover { background: var(--gold); color: var(--obsidian); }
 .btn--large { padding: 1.1rem 2.8rem; font-size: 0.9rem; }
 
+/* ── Brand Mark ────────────────────────────────────────────────── */
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.brand-mark__icon {
+  width: 22px;
+  height: 22px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.brand-mark__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.brand-mark__name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.brand-mark__sub {
+  font-family: var(--font-sans);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: var(--slate);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.brand-mark--preloader {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+.brand-mark--preloader .brand-mark__icon {
+  width: 36px;
+  height: 36px;
+}
+.brand-mark--preloader .brand-mark__text {
+  align-items: center;
+}
+.brand-mark--preloader .brand-mark__name {
+  font-size: 2.2rem;
+  letter-spacing: 0.25em;
+}
+.brand-mark--preloader .brand-mark__sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  margin-top: 4px;
+}
+
+.brand-mark--footer .brand-mark__name { font-size: 1.4rem; }
+.brand-mark--footer .brand-mark__sub { font-size: 0.55rem; }
+.brand-mark--footer { margin-bottom: 1rem; }
+
 /* ── Preloader ──────────────────────────────────────────────────── */
 .preloader {
   position: fixed;
@@ -139,13 +202,7 @@ button { background: none; border: none; cursor: pointer; color: inherit; font: 
   justify-content: center;
   gap: 2.5rem;
 }
-.preloader__logo { width: clamp(120px, 20vw, 200px); }
-.preloader__logo-img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  filter: brightness(1.1);
-}
+.preloader__logo { display: flex; align-items: center; justify-content: center; }
 .preloader__track {
   width: clamp(120px, 20vw, 200px);
   height: 2px;
@@ -208,15 +265,12 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
   gap: 2rem;
 }
 .nav__logo { display: flex; align-items: center; }
-.nav__logo-img {
-  height: 44px;
-  width: auto;
-  object-fit: contain;
-  border-radius: 6px;
-  filter: brightness(1.1);
-  transition: height 0.3s ease, filter 0.3s ease;
-}
-.nav--scrolled .nav__logo-img { height: 36px; }
+.nav__logo .brand-mark__name { transition: font-size 0.3s ease; }
+.nav__logo .brand-mark__icon { transition: width 0.3s ease, height 0.3s ease; }
+.nav__logo .brand-mark__sub { transition: font-size 0.3s ease; }
+.nav--scrolled .nav__logo .brand-mark__name { font-size: 1.05rem; }
+.nav--scrolled .nav__logo .brand-mark__icon { width: 18px; height: 18px; }
+.nav--scrolled .nav__logo .brand-mark__sub { font-size: 0.42rem; }
 
 .nav__links { display: none; align-items: center; gap: 2rem; }
 .nav__link {
@@ -881,50 +935,99 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
 
 /* ── Team ───────────────────────────────────────────────────────── */
 .team__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 .team-card {
-  text-align: center;
-  transition: transform var(--transition);
-}
-.team-card:hover { transform: translateY(-4px); }
-.team-card__image {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
   overflow: hidden;
-  margin-bottom: 1.2rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.team-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 12px 40px rgba(198, 164, 108, 0.08);
+}
+.team-card__image {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 4/5;
+  overflow: hidden;
   background: var(--charcoal);
 }
 .team-card__image img {
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: grayscale(100%);
-  transition: filter 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  object-position: top center;
+  filter: grayscale(30%) contrast(1.05);
+  transition: filter 0.6s var(--ease-out), transform 0.6s var(--ease-out);
 }
 .team-card:hover .team-card__image img {
-  filter: grayscale(0%);
+  filter: grayscale(0%) contrast(1.05);
   transform: scale(1.03);
 }
 .team-card__image::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--gold);
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
   transform: scaleX(0);
-  transition: transform 0.5s var(--ease-out);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-out);
 }
 .team-card:hover .team-card__image::after { transform: scaleX(1); }
-.team-card__name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
+.team-card__info {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.team-card__role { font-size: 0.8rem; color: var(--gold); margin-bottom: 0.3rem; }
-.team-card__credentials { font-size: 0.7rem; color: var(--slate); letter-spacing: 0.05em; }
+.team-card__name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.team-card__role {
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+.team-card__credentials {
+  font-size: 0.72rem;
+  color: var(--slate);
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+.team-card__bio {
+  font-size: 0.9rem;
+  color: rgba(245, 242, 236, 0.65);
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+.team-card__linkedin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  border: 1px solid var(--gold-dark);
+  padding: 0.5rem 1.2rem;
+  width: fit-content;
+  transition: all var(--transition);
+}
+.team-card__linkedin svg { width: 16px; height: 16px; flex-shrink: 0; }
+.team-card__linkedin:hover {
+  background: var(--gold);
+  color: var(--obsidian);
+  border-color: var(--gold);
+}
 
 /* ── Awards Marquee ────────────────────────────────────────────── */
 .marquee {
@@ -1019,6 +1122,28 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
 .cta__contact-item:hover { color: var(--gold); }
 .cta__contact-item svg { width: 18px; height: 18px; flex-shrink: 0; }
 
+.cta__proof {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 242, 236, 0.3);
+  margin-top: -1rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hooked: Primary CTA shimmer on idle */
+@keyframes ctaShimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+.cta__buttons .btn--primary::after {
+  animation: ctaShimmer 4s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
 /* ── Footer ─────────────────────────────────────────────────────── */
 .footer {
   padding: clamp(3rem, 6vh, 5rem) 0 clamp(1.5rem, 3vh, 2rem);
@@ -1031,13 +1156,7 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
   gap: 2.5rem;
   margin-bottom: 3rem;
 }
-.footer__logo {
-  height: 50px;
-  width: auto;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  filter: brightness(1.1);
-}
+.footer__col--brand .brand-mark { margin-bottom: 1rem; }
 .footer__tagline { font-size: 0.85rem; color: var(--slate); line-height: 1.7; max-width: 300px; }
 .footer__heading {
   font-family: 'Playfair Display', serif;
@@ -1159,7 +1278,8 @@ a.footer__link:hover { color: var(--gold); padding-left: 0.5rem; }
 @media (min-width: 768px) {
   .about__inner { grid-template-columns: 1.2fr 1fr; }
   .expertise__grid { grid-template-columns: repeat(2, 1fr); }
-  .team__grid { grid-template-columns: repeat(2, 1fr); }
+  .team-card { grid-template-columns: 1fr 1.2fr; }
+  .team-card__image { aspect-ratio: 3/4; }
   .footer__bottom { flex-direction: row; justify-content: space-between; }
   .clientele__grid { grid-template-columns: repeat(5, 1fr); }
   .lightbox__prev { left: -28px; }
@@ -1179,7 +1299,8 @@ a.footer__link:hover { color: var(--gold); padding-left: 0.5rem; }
   .nav__cta { display: inline-flex; }
   .nav__hamburger { display: none; }
   .expertise__grid { grid-template-columns: repeat(4, 1fr); }
-  .team__grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; margin: 0 auto; }
+  .team-card { grid-template-columns: 1fr 1.4fr; }
+  .team-card__image { aspect-ratio: auto; height: 100%; min-height: 360px; }
   .process__timeline { grid-template-columns: repeat(5, 1fr); gap: 0; }
   .process__line { display: block; }
   .footer__grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }

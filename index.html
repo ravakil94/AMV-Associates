@@ -79,7 +79,13 @@
   <!-- Preloader -->
   <div class="preloader" aria-hidden="true">
     <div class="preloader__logo">
-      <img src="assets/images/amv-logo.png" alt="" class="preloader__logo-img">
+      <div class="brand-mark brand-mark--preloader">
+        <svg class="brand-mark__icon" viewBox="0 0 20 20"><path d="M10 2L18 16H2Z" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="6" y1="12" x2="14" y2="12" stroke="currentColor" stroke-width="0.8"/></svg>
+        <div class="brand-mark__text">
+          <span class="brand-mark__name">AMV</span>
+          <span class="brand-mark__sub">ASSOCIATES</span>
+        </div>
+      </div>
     </div>
     <div class="preloader__track">
       <div class="preloader__bar"></div>
@@ -94,7 +100,13 @@
   <header class="nav" role="banner">
     <div class="container nav__inner">
       <a href="#" class="nav__logo" aria-label="AMV Associate — Home">
-        <img src="assets/images/amv-logo.png" alt="AMV Associate Pvt. Ltd." class="nav__logo-img">
+        <div class="brand-mark">
+          <svg class="brand-mark__icon" viewBox="0 0 20 20"><path d="M10 2L18 16H2Z" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="6" y1="12" x2="14" y2="12" stroke="currentColor" stroke-width="0.8"/></svg>
+          <div class="brand-mark__text">
+            <span class="brand-mark__name">AMV</span>
+            <span class="brand-mark__sub">ASSOCIATES</span>
+          </div>
+        </div>
       </a>
 
       <nav class="nav__links" role="navigation" aria-label="Main navigation">
@@ -105,7 +117,7 @@
         <a href="#contact" class="nav__link" data-hover>Contact</a>
       </nav>
 
-      <a href="#contact" class="nav__cta" data-hover>Start Your Project</a>
+      <a href="#contact" class="nav__cta" data-hover>Free Consultation</a>
 
       <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -136,7 +148,7 @@
         </h1>
         <p class="hero__subtitle">Architecture &middot; Interior Design &middot; Chartered Surveying &middot; Design Management</p>
         <div class="hero__cta">
-          <a href="#contact" class="btn btn--primary" data-hover>Start Your Project</a>
+          <a href="#contact" class="btn btn--primary" data-hover>Book a Free Consultation</a>
           <a href="#clientele" class="btn btn--outline" data-hover>View Our Work</a>
         </div>
         <div class="hero__trust">
@@ -386,8 +398,8 @@
     <!-- PHILOSOPHY -->
     <section class="philosophy section" id="philosophy">
       <div class="container">
-        <p class="philosophy__quote" data-split-chars>We believe great design is invisible — it simply works. Every space we create is a dialogue between form and function, built to endure and designed to inspire.</p>
-        <p class="philosophy__attribution">— Dr. Amal M. Vakil, Founder</p>
+        <p class="philosophy__quote" data-split-chars>Architecture begins where engineering ends. We shape the emotion of a space — the way light falls, the rhythm of a room, the feeling that everything belongs exactly where it is.</p>
+        <p class="philosophy__attribution">— Dr. Amal M. Vakil, Founder & Principal</p>
       </div>
     </section>
 
@@ -486,20 +498,35 @@
             <div class="team-card__image">
               <img src="assets/images/team/amal-vakil.jpg" alt="Dr. Amal M. Vakil — Founder & Principal" loading="lazy">
             </div>
-            <h3 class="team-card__name">Dr. Amal M. Vakil</h3>
-            <p class="team-card__role">Founder & Principal</p>
-            <p class="team-card__credentials">Ph.D &middot; MBA &middot; MRICS &middot; PMP &middot; ACIArb</p>
+            <div class="team-card__info">
+              <h3 class="team-card__name">Dr. Amal M. Vakil</h3>
+              <p class="team-card__role">Founder & Principal</p>
+              <p class="team-card__credentials">Ph.D &middot; MBA &middot; MRICS &middot; PMP &middot; ACIArb</p>
+              <p class="team-card__bio">Three decades of visionary leadership in architecture, interior design, and chartered surveying — creating spaces that stand the test of time.</p>
+              <!-- Replace with actual LinkedIn URL -->
+              <a href="https://linkedin.com/in/amalvakil" class="team-card__linkedin" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M8 11v5M8 8v.01M12 16v-5c0-1 .6-2 2-2s2 1 2 2v5"/></svg>
+                Connect on LinkedIn
+              </a>
+            </div>
           </div>
 
           <div class="team-card" data-hover>
             <div class="team-card__image">
               <img src="assets/images/team/omprakash-palkar.jpg" alt="Omprakash Palkar — Director" loading="lazy">
             </div>
-            <h3 class="team-card__name">Omprakash Palkar</h3>
-            <p class="team-card__role">Director</p>
-            <p class="team-card__credentials">18+ Years Experience</p>
+            <div class="team-card__info">
+              <h3 class="team-card__name">Omprakash Palkar</h3>
+              <p class="team-card__role">Director</p>
+              <p class="team-card__credentials">18+ Years of Expertise</p>
+              <p class="team-card__bio">Driving operational excellence and project delivery across corporate, commercial, and residential engagements.</p>
+              <!-- Replace with actual LinkedIn URL -->
+              <a href="https://linkedin.com/in/omprakashpalkar" class="team-card__linkedin" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M8 11v5M8 8v.01M12 16v-5c0-1 .6-2 2-2s2 1 2 2v5"/></svg>
+                Connect on LinkedIn
+              </a>
+            </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -512,11 +539,12 @@
           <span class="hero__line"><span class="hero__line-inner">Let's Create Something</span></span>
           <span class="hero__line"><span class="hero__line-inner">Extraordinary</span></span>
         </h2>
-        <p class="cta__text">From corporate headquarters to dream homes — every great space starts with a conversation.</p>
+        <p class="cta__text">Every great space starts with a conversation. No commitment — just tell us your vision.</p>
         <div class="cta__buttons">
-          <a href="mailto:hello@amvassociate.in" class="btn btn--primary btn--large" data-hover>Schedule a Consultation</a>
+          <a href="mailto:hello@amvassociate.in" class="btn btn--primary btn--large" data-hover>Book Your Free Consultation</a>
           <a href="tel:+919967224466" class="btn btn--outline btn--large" data-hover>Call Us Now</a>
         </div>
+        <p class="cta__proof">Trusted by Fortune 500 companies &middot; 200+ projects delivered &middot; 30+ years</p>
         <div class="cta__contact">
           <a href="mailto:hello@amvassociate.in" class="cta__contact-item" data-hover>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
@@ -545,7 +573,13 @@
     <div class="container">
       <div class="footer__grid">
         <div class="footer__col footer__col--brand">
-          <img src="assets/images/amv-logo.png" alt="AMV Associate" class="footer__logo">
+          <div class="brand-mark brand-mark--footer">
+            <svg class="brand-mark__icon" viewBox="0 0 20 20"><path d="M10 2L18 16H2Z" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="6" y1="12" x2="14" y2="12" stroke="currentColor" stroke-width="0.8"/></svg>
+            <div class="brand-mark__text">
+              <span class="brand-mark__name">AMV</span>
+              <span class="brand-mark__sub">ASSOCIATES</span>
+            </div>
+          </div>
           <p class="footer__tagline">Architecture, interior design, and design-build solutions for spaces that endure.</p>
         </div>
         <div class="footer__col">
