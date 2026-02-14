@@ -1,7 +1,7 @@
 /* ================================================================
    AMV ASSOCIATES — Main JavaScript
    Preloader · Magnetic Cursor · Navigation · Smooth Scroll
-   Hero Entrance · Counter · Scroll Animations · Utilities
+   Hero Entrance · Counter · Lightbox · Scroll Animations · Utilities
    ================================================================ */
 
 (function () {
@@ -263,6 +263,133 @@
     });
   }
 
+  /* ── Lightbox Gallery ──────────────────────────────────────── */
+  function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+
+    const overlay = lightbox.querySelector('.lightbox__overlay');
+    const closeBtn = lightbox.querySelector('.lightbox__close');
+    const title = lightbox.querySelector('.lightbox__title');
+    const meta = lightbox.querySelector('.lightbox__meta');
+    const image = lightbox.querySelector('.lightbox__image');
+    const prevBtn = lightbox.querySelector('.lightbox__prev');
+    const nextBtn = lightbox.querySelector('.lightbox__next');
+    const dotsContainer = lightbox.querySelector('.lightbox__dots');
+
+    let currentImages = [];
+    let currentIndex = 0;
+
+    function openLightbox(el) {
+      const name = el.getAttribute('data-name') || '';
+      const category = el.getAttribute('data-category') || '';
+      const location = el.getAttribute('data-location') || '';
+      const imagesAttr = el.getAttribute('data-images');
+      if (!imagesAttr) return;
+
+      try {
+        currentImages = JSON.parse(imagesAttr).map(img => 'assets/images/projects/' + img);
+      } catch (e) { return; }
+
+      if (!currentImages.length) return;
+
+      currentIndex = 0;
+      title.textContent = name;
+      meta.textContent = [category, location].filter(Boolean).join(' — ');
+
+      updateImage();
+      updateDots();
+      updateArrows();
+
+      lightbox.classList.add('lightbox--active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      if (lenis) lenis.stop();
+
+      // GSAP entrance
+      gsap.fromTo(lightbox.querySelector('.lightbox__content'),
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.4, ease: 'power3.out' }
+      );
+    }
+
+    function closeLightbox() {
+      gsap.to(lightbox.querySelector('.lightbox__content'), {
+        scale: 0.9, opacity: 0, duration: 0.25, ease: 'power2.in',
+        onComplete: () => {
+          lightbox.classList.remove('lightbox--active');
+          lightbox.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          if (lenis) lenis.start();
+        }
+      });
+    }
+
+    function updateImage() {
+      gsap.to(image, {
+        opacity: 0, duration: 0.15,
+        onComplete: () => {
+          image.src = currentImages[currentIndex];
+          image.alt = title.textContent + ' — Project photo ' + (currentIndex + 1);
+          gsap.to(image, { opacity: 1, duration: 0.25 });
+        }
+      });
+    }
+
+    function updateDots() {
+      dotsContainer.innerHTML = '';
+      if (currentImages.length <= 1) return;
+      currentImages.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'lightbox__dot' + (i === currentIndex ? ' lightbox__dot--active' : '');
+        dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+        dot.addEventListener('click', () => {
+          currentIndex = i;
+          updateImage();
+          updateDots();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function updateArrows() {
+      const show = currentImages.length > 1;
+      prevBtn.style.display = show ? '' : 'none';
+      nextBtn.style.display = show ? '' : 'none';
+    }
+
+    function goNext() {
+      if (currentImages.length <= 1) return;
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      updateImage();
+      updateDots();
+    }
+
+    function goPrev() {
+      if (currentImages.length <= 1) return;
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      updateImage();
+      updateDots();
+    }
+
+    // Event listeners
+    document.querySelectorAll('.clientele__item--has-projects').forEach(el => {
+      el.addEventListener('click', () => openLightbox(el));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', goPrev);
+    nextBtn.addEventListener('click', goNext);
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('lightbox--active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+    });
+  }
+
   /* ── Scroll Animations ───────────────────────────────────────── */
   function initScrollAnimations() {
     if (prefersReducedMotion) return;
@@ -296,14 +423,12 @@
       });
     });
 
-    // Project cards — 3D tilt entrance
-    gsap.utils.toArray('.project-card').forEach((card, i) => {
-      gsap.from(card, {
-        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none reverse' },
-        scale: 0.92, opacity: 0,
-        rotationY: i % 2 === 0 ? -5 : 5,
-        transformOrigin: i % 2 === 0 ? 'left center' : 'right center',
-        duration: 0.9, delay: (i % 4) * 0.12, ease: 'power3.out'
+    // Clientele logos — cascading fade-in
+    gsap.utils.toArray('.clientele__item').forEach((item, i) => {
+      gsap.from(item, {
+        scrollTrigger: { trigger: '.clientele__grid', start: 'top 85%', toggleActions: 'play none none reverse' },
+        opacity: 0, scale: 0.9, y: 20,
+        duration: 0.5, delay: i * 0.03, ease: 'power2.out'
       });
     });
 
@@ -397,25 +522,6 @@
         });
       }
     });
-
-    // Client logos — cascading fade
-    gsap.utils.toArray('.recognition__clients-logos img').forEach((logo, i) => {
-      gsap.from(logo, {
-        scrollTrigger: { trigger: '.recognition__clients-logos', start: 'top 85%', toggleActions: 'play none none reverse' },
-        opacity: 0, scale: 0.8, y: 20,
-        duration: 0.5, delay: i * 0.04, ease: 'power2.out'
-      });
-    });
-
-    // Recognition label
-    const clientsLabel = document.querySelector('.recognition__clients-label');
-    if (clientsLabel) {
-      gsap.from(clientsLabel, {
-        scrollTrigger: { trigger: clientsLabel, start: 'top 90%', toggleActions: 'play none none reverse' },
-        opacity: 0, y: 20,
-        duration: 0.6, ease: 'power3.out'
-      });
-    }
 
     // CTA — line reveal
     const ctaLines = document.querySelectorAll('.cta .hero__line-inner');
@@ -520,6 +626,7 @@
     initMarquee();
     initBackToTop();
     initWhatsApp();
+    initLightbox();
 
     initPreloader(() => {
       initHeroEntrance();
