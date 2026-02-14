@@ -21,7 +21,7 @@
   --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
   --container: 1320px;
   --gutter: clamp(1rem, 3vw, 2rem);
-  --section-pad: clamp(4rem, 10vh, 8rem);
+  --section-pad: clamp(5rem, 12vh, 9rem);
   --radius: 8px;
   --transition: 0.4s var(--ease-out);
   --font-serif: 'Playfair Display', serif;
@@ -56,7 +56,49 @@ a { color: inherit; text-decoration: none; }
 button { background: none; border: none; cursor: pointer; color: inherit; font: inherit; }
 
 .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
-.section { padding: var(--section-pad) 0; }
+.section { padding: var(--section-pad) 0; position: relative; }
+
+/* ── Floating Architectural Decor ──────────────────────────────── */
+.decor {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.decor__el {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s, 18px);
+  height: var(--s, 18px);
+  color: var(--gold);
+  opacity: 0.05;
+  animation: decorFloat var(--d, 20s) ease-in-out infinite;
+  animation-delay: var(--dl, 0s);
+}
+.decor__el:nth-child(even) {
+  animation-name: decorFloat2;
+}
+.decor__el:nth-child(3n) {
+  animation-name: decorFloat3;
+}
+
+@keyframes decorFloat {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  25% { transform: translateY(-22px) translateX(10px) rotate(6deg); }
+  50% { transform: translateY(-35px) translateX(-6px) rotate(-3deg); }
+  75% { transform: translateY(-14px) translateX(14px) rotate(4deg); }
+}
+@keyframes decorFloat2 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  33% { transform: translateY(16px) translateX(-12px) rotate(-5deg); }
+  66% { transform: translateY(-20px) translateX(10px) rotate(7deg); }
+}
+@keyframes decorFloat3 {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-28px) translateX(6px) rotate(10deg); }
+}
 
 /* ── Typography ─────────────────────────────────────────────────── */
 .section__label {
@@ -935,9 +977,9 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
 
 /* ── Team ───────────────────────────────────────────────────────── */
 .team__grid {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 .team-card {
   display: grid;
@@ -949,80 +991,90 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
 }
 .team-card:hover {
   border-color: var(--glass-border-hover);
-  box-shadow: 0 12px 40px rgba(198, 164, 108, 0.08);
+  box-shadow: 0 8px 30px rgba(198, 164, 108, 0.08);
 }
 .team-card__image {
   position: relative;
-  aspect-ratio: 4/5;
+  aspect-ratio: 4/3;
   overflow: hidden;
   background: var(--charcoal);
+}
+/* Photo enhancement — professional warmth + vignette */
+.team-card__image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.25);
+  pointer-events: none;
 }
 .team-card__image img {
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: top center;
-  filter: grayscale(30%) contrast(1.05);
+  filter: grayscale(15%) contrast(1.1) brightness(1.05) saturate(1.1);
   transition: filter 0.6s var(--ease-out), transform 0.6s var(--ease-out);
 }
 .team-card:hover .team-card__image img {
-  filter: grayscale(0%) contrast(1.05);
+  filter: grayscale(0%) contrast(1.1) brightness(1.08) saturate(1.15);
   transform: scale(1.03);
 }
 .team-card__image::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 4px;
+  height: 3px;
   background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.6s var(--ease-out);
+  z-index: 2;
 }
 .team-card:hover .team-card__image::after { transform: scaleX(1); }
 .team-card__info {
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.2rem, 2.5vw, 2rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .team-card__name {
   font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
   font-weight: 600;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 .team-card__role {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--gold);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   font-weight: 500;
 }
 .team-card__credentials {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--slate);
   letter-spacing: 0.08em;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 .team-card__bio {
-  font-size: 0.9rem;
-  color: rgba(245, 242, 236, 0.65);
-  line-height: 1.7;
-  margin-bottom: 1.2rem;
+  font-size: 0.85rem;
+  color: rgba(245, 242, 236, 0.6);
+  line-height: 1.65;
+  margin-bottom: 1rem;
 }
 .team-card__linkedin {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.78rem;
+  gap: 0.4rem;
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--gold);
   border: 1px solid var(--gold-dark);
-  padding: 0.5rem 1.2rem;
+  padding: 0.4rem 1rem;
   width: fit-content;
   transition: all var(--transition);
 }
-.team-card__linkedin svg { width: 16px; height: 16px; flex-shrink: 0; }
+.team-card__linkedin svg { width: 14px; height: 14px; flex-shrink: 0; }
 .team-card__linkedin:hover {
   background: var(--gold);
   color: var(--obsidian);
@@ -1256,6 +1308,10 @@ a.footer__link:hover { color: var(--gold); padding-left: 0.5rem; }
    RESPONSIVE
    ══════════════════════════════════════════════════════════════════ */
 
+@media (max-width: 639px) {
+  .decor { display: none; }
+}
+
 @media (min-width: 480px) {
   .clientele__grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -1278,8 +1334,8 @@ a.footer__link:hover { color: var(--gold); padding-left: 0.5rem; }
 @media (min-width: 768px) {
   .about__inner { grid-template-columns: 1.2fr 1fr; }
   .expertise__grid { grid-template-columns: repeat(2, 1fr); }
-  .team-card { grid-template-columns: 1fr 1.2fr; }
-  .team-card__image { aspect-ratio: 3/4; }
+  .team-card { grid-template-columns: 220px 1fr; }
+  .team-card__image { aspect-ratio: auto; height: 100%; }
   .footer__bottom { flex-direction: row; justify-content: space-between; }
   .clientele__grid { grid-template-columns: repeat(5, 1fr); }
   .lightbox__prev { left: -28px; }
@@ -1299,8 +1355,9 @@ a.footer__link:hover { color: var(--gold); padding-left: 0.5rem; }
   .nav__cta { display: inline-flex; }
   .nav__hamburger { display: none; }
   .expertise__grid { grid-template-columns: repeat(4, 1fr); }
-  .team-card { grid-template-columns: 1fr 1.4fr; }
-  .team-card__image { aspect-ratio: auto; height: 100%; min-height: 360px; }
+  .team__grid { grid-template-columns: repeat(2, 1fr); }
+  .team-card { grid-template-columns: 200px 1fr; }
+  .team-card__image { aspect-ratio: auto; height: 100%; min-height: 240px; }
   .process__timeline { grid-template-columns: repeat(5, 1fr); gap: 0; }
   .process__line { display: block; }
   .footer__grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
@@ -1324,13 +1381,14 @@ a.footer__link:hover { color: var(--gold); padding-left: 0.5rem; }
   .marquee { animation: none; }
   .whatsapp-float.is-visible { animation: none; }
   .philosophy__char { opacity: 1 !important; }
+  .decor { display: none; }
 }
 
 /* ── Print ──────────────────────────────────────────────────────── */
 @media print {
   body { background: #fff; color: #000; }
   .nav, .preloader, .cursor__dot, .cursor__ring, .hero__scroll,
-  .whatsapp-float, .back-to-top, .marquee { display: none !important; }
+  .whatsapp-float, .back-to-top, .marquee, .decor { display: none !important; }
   .section { padding: 2rem 0; }
   .hero { min-height: auto; }
   .philosophy__char { opacity: 1 !important; }
