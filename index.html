@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMV Associate | Architecture & Interior Design</title>
+  <meta name="description" content="AMV Associate — Award-winning architecture and interior design studio in Mumbai. Crafting luxury residential, commercial, and hospitality spaces that define legacy.">
+  <meta name="keywords" content="architecture, interior design, luxury, Mumbai, India, AMV Associate">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AMV Associate | Architecture & Interior Design">
+  <meta property="og:description" content="Crafting Spaces That Define Legacy — Award-winning architecture and interior design studio.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://amvassociate.com">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Lenis Smooth Scroll CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.17/dist/lenis.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══ Preloader ═══ -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__text">AMV</div>
+    <div class="preloader__track">
+      <div class="preloader__bar"></div>
+    </div>
+  </div>
+
+  <!-- ═══ Custom Cursor ═══ -->
+  <div class="cursor__dot" aria-hidden="true"></div>
+  <div class="cursor__ring" aria-hidden="true"></div>
+
+  <!-- ═══ Navigation ═══ -->
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo" aria-label="AMV Associate — Home">
+        <img src="assets/images/amv-logo.jpg" alt="AMV Associate" onerror="this.style.display='none'">
+        <span class="nav__logo-text">AMV</span>
+      </a>
+
+      <nav class="nav__links" role="navigation" aria-label="Main navigation">
+        <a href="#projects" class="nav__link" data-hover>Projects</a>
+        <a href="#expertise" class="nav__link" data-hover>Expertise</a>
+        <a href="#process" class="nav__link" data-hover>Process</a>
+        <a href="#materials" class="nav__link" data-hover>Materials</a>
+        <a href="#insights" class="nav__link" data-hover>Insights</a>
+        <a href="#contact" class="nav__link" data-hover>Contact</a>
+      </nav>
+
+      <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="nav__overlay">
+      <a href="#projects" class="nav__overlay-link" data-hover>Projects</a>
+      <a href="#expertise" class="nav__overlay-link" data-hover>Expertise</a>
+      <a href="#process" class="nav__overlay-link" data-hover>Process</a>
+      <a href="#materials" class="nav__overlay-link" data-hover>Materials</a>
+      <a href="#insights" class="nav__overlay-link" data-hover>Insights</a>
+      <a href="#contact" class="nav__overlay-link" data-hover>Contact</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ Section 1: Hero ═══ -->
+    <section class="hero section" id="hero">
+      <div class="container hero__content">
+        <h1 class="hero__heading">
+          <span class="hero__line"><span class="hero__line-inner">Crafting Spaces</span></span>
+          <span class="hero__line"><span class="hero__line-inner">That Define</span></span>
+          <span class="hero__line"><span class="hero__line-inner">Legacy</span></span>
+        </h1>
+        <p class="hero__subtitle">Architecture & Interior Design Studio — Mumbai</p>
+        <a href="#projects" class="hero__scroll" aria-label="Scroll to explore">
+          <span class="hero__scroll-text">Explore</span>
+          <svg class="hero__scroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ Section 2: Manifesto ═══ -->
+    <section class="manifesto section" id="manifesto">
+      <div class="container manifesto__inner">
+        <hr class="manifesto__rule gold-rule">
+        <p class="manifesto__text">
+          We believe architecture is the art of organizing space to elevate the human experience. Every line we draw, every material we select, serves a singular vision — timeless beauty that transcends trends.
+        </p>
+        <hr class="manifesto__rule manifesto__rule--bottom gold-rule">
+      </div>
+    </section>
+
+    <!-- ═══ Section 3: Featured Projects ═══ -->
+    <section class="section" id="projects">
+      <div class="container">
+        <span class="section__label">Selected Work</span>
+        <h2 class="section__heading">Featured Projects</h2>
+
+        <div class="projects__grid">
+          <!-- Project 1 — Spans 2 rows -->
+          <article class="project-card project-card--1" data-hover>
+            <div class="project-card__image"></div>
+            <div class="project-card__overlay">
+              <span class="project-card__category">Luxury Residential</span>
+              <h3 class="project-card__title">The Meridian Residence</h3>
+              <span class="project-card__location">Mumbai</span>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card project-card--2" data-hover>
+            <div class="project-card__image"></div>
+            <div class="project-card__overlay">
+              <span class="project-card__category">Commercial</span>
+              <h3 class="project-card__title">Aurelia Tower</h3>
+              <span class="project-card__location">Pune</span>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card project-card--3" data-hover>
+            <div class="project-card__image"></div>
+            <div class="project-card__overlay">
+              <span class="project-card__category">Hospitality</span>
+              <h3 class="project-card__title">The Silk Route</h3>
+              <span class="project-card__location">Goa</span>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card project-card--4" data-hover>
+            <div class="project-card__image"></div>
+            <div class="project-card__overlay">
+              <span class="project-card__category">Institutional</span>
+              <h3 class="project-card__title">Zenith Cultural Centre</h3>
+              <span class="project-card__location">Delhi</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Section 4: Sector Expertise ═══ -->
+    <section class="section" id="expertise">
+      <div class="container">
+        <span class="section__label">Expertise</span>
+        <h2 class="section__heading">Sectors We Shape</h2>
+
+        <div class="expertise__grid">
+          <div class="expertise-card expertise-card--residential">
+            <div class="expertise-card__icon"></div>
+            <h3 class="expertise-card__title">Residential Sanctuaries</h3>
+            <p class="expertise-card__desc">Bespoke homes designed around the way you live — where every detail serves both beauty and purpose.</p>
+          </div>
+
+          <div class="expertise-card expertise-card--commercial">
+            <div class="expertise-card__icon"></div>
+            <h3 class="expertise-card__title">Commercial Landmarks</h3>
+            <p class="expertise-card__desc">Workspaces and retail environments that embody brand identity and inspire productivity.</p>
+          </div>
+
+          <div class="expertise-card expertise-card--hospitality">
+            <div class="expertise-card__icon"></div>
+            <h3 class="expertise-card__title">Hospitality Experiences</h3>
+            <p class="expertise-card__desc">Hotels, restaurants, and resorts where atmosphere becomes the defining memory.</p>
+          </div>
+
+          <div class="expertise-card expertise-card--institutional">
+            <div class="expertise-card__icon"></div>
+            <h3 class="expertise-card__title">Institutional Icons</h3>
+            <p class="expertise-card__desc">Cultural centres, educational campuses, and civic spaces that serve communities for generations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Section 5: Philosophy ═══ -->
+    <section class="philosophy section" id="philosophy">
+      <div class="container">
+        <p class="philosophy__quote" data-split-chars>
+          Design is not what you see. It is what you make others feel.
+        </p>
+        <p class="philosophy__attribution">— Studio Philosophy, AMV Associate</p>
+      </div>
+    </section>
+
+    <!-- ═══ Section 6: Design Process ═══ -->
+    <section class="section" id="process">
+      <div class="container">
+        <span class="section__label">Our Approach</span>
+        <h2 class="section__heading">Signature Design Process</h2>
+
+        <div class="process__timeline">
+          <div class="process__line"><div class="process__line-fill"></div></div>
+
+          <div class="process__step">
+            <div class="process__number">01</div>
+            <h3 class="process__title">Discovery</h3>
+            <p class="process__desc">Understanding your vision, lifestyle, and the soul of the site.</p>
+          </div>
+
+          <div class="process__step">
+            <div class="process__number">02</div>
+            <h3 class="process__title">Concept</h3>
+            <p class="process__desc">Translating aspirations into a cohesive design language.</p>
+          </div>
+
+          <div class="process__step">
+            <div class="process__number">03</div>
+            <h3 class="process__title">Development</h3>
+            <p class="process__desc">Refining every detail — materials, light, proportion, flow.</p>
+          </div>
+
+          <div class="process__step">
+            <div class="process__number">04</div>
+            <h3 class="process__title">Execution</h3>
+            <p class="process__desc">Meticulous on-site delivery with uncompromising quality control.</p>
+          </div>
+
+          <div class="process__step">
+            <div class="process__number">05</div>
+            <h3 class="process__title">Handover</h3>
+            <p class="process__desc">Welcoming you into a space that exceeds every expectation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Section 7: Materials & Craftsmanship ═══ -->
+    <section class="section" id="materials">
+      <div class="container">
+        <span class="section__label">Craftsmanship</span>
+        <h2 class="section__heading">Material & Texture</h2>
+
+        <div class="materials__grid">
+          <div class="material-card material-card--marble">
+            <div class="material-card__swatch"></div>
+            <h3 class="material-card__title">Italian Marble</h3>
+            <p class="material-card__desc">Carrara & Statuario</p>
+          </div>
+
+          <div class="material-card material-card--teak">
+            <div class="material-card__swatch"></div>
+            <h3 class="material-card__title">Burmese Teak</h3>
+            <p class="material-card__desc">Aged & Hand-finished</p>
+          </div>
+
+          <div class="material-card material-card--brass">
+            <div class="material-card__swatch"></div>
+            <h3 class="material-card__title">Hand-Forged Brass</h3>
+            <p class="material-card__desc">Artisan Hardware</p>
+          </div>
+
+          <div class="material-card material-card--glass">
+            <div class="material-card__swatch"></div>
+            <h3 class="material-card__title">Tempered Glass</h3>
+            <p class="material-card__desc">Structural & Decorative</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Section 8: Recognition & Clients ═══ -->
+    <section class="recognition section" id="recognition">
+      <div class="recognition__awards">
+        <div class="marquee" aria-label="Awards and achievements">
+          <div class="marquee__content">
+            <span class="marquee__item">IIID Award 2023</span>
+            <span class="marquee__separator"></span>
+            <span class="marquee__item">AD50 Listed</span>
+            <span class="marquee__separator"></span>
+            <span class="marquee__item">EDIDA Nominee</span>
+            <span class="marquee__separator"></span>
+            <span class="marquee__item">15+ Years of Excellence</span>
+            <span class="marquee__separator"></span>
+            <span class="marquee__item">200+ Projects Delivered</span>
+            <span class="marquee__separator"></span>
+            <span class="marquee__item">IIID Award 2023</span>
+            <span class="marquee__separator"></span>
+            <span class="marquee__item">AD50 Listed</span>
+            <span class="marquee__separator"></span>
+            <span class="marquee__item">EDIDA Nominee</span>
+            <span class="marquee__separator"></span>
+            <span class="marquee__item">15+ Years of Excellence</span>
+            <span class="marquee__separator"></span>
+            <span class="marquee__item">200+ Projects Delivered</span>
+            <span class="marquee__separator"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container recognition__clients">
+        <p class="recognition__clients-label">Trusted By</p>
+        <div class="recognition__clients-list">
+          <span class="recognition__client">Lodha</span>
+          <span class="recognition__client">Godrej</span>
+          <span class="recognition__client">Oberoi</span>
+          <span class="recognition__client">Tata Housing</span>
+          <span class="recognition__client">Raheja</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Section 9: Insights ═══ -->
+    <section class="section" id="insights">
+      <div class="container">
+        <span class="section__label">Journal</span>
+        <h2 class="section__heading">Insights</h2>
+
+        <div class="insights__grid">
+          <article class="insight-card" data-hover>
+            <div class="insight-card__image"></div>
+            <div class="insight-card__body">
+              <time class="insight-card__date">February 2025</time>
+              <h3 class="insight-card__title">The Return of Biophilic Design in Urban Homes</h3>
+              <p class="insight-card__excerpt">How integrating living systems into residential architecture is reshaping the urban dwelling experience.</p>
+              <span class="insight-card__link">Read More →</span>
+            </div>
+          </article>
+
+          <article class="insight-card" data-hover>
+            <div class="insight-card__image"></div>
+            <div class="insight-card__body">
+              <time class="insight-card__date">January 2025</time>
+              <h3 class="insight-card__title">Material Honesty: Why We Choose Natural Over Synthetic</h3>
+              <p class="insight-card__excerpt">Exploring the philosophy behind our commitment to authentic materials and craft-forward construction.</p>
+              <span class="insight-card__link">Read More →</span>
+            </div>
+          </article>
+
+          <article class="insight-card" data-hover>
+            <div class="insight-card__image"></div>
+            <div class="insight-card__body">
+              <time class="insight-card__date">December 2024</time>
+              <h3 class="insight-card__title">Designing for the Indian Climate: Lessons from Vernacular</h3>
+              <p class="insight-card__excerpt">What traditional Indian architecture teaches us about sustainable, climate-responsive design.</p>
+              <span class="insight-card__link">Read More →</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Section 10: CTA ═══ -->
+    <section class="cta section" id="contact">
+      <div class="container">
+        <h2 class="cta__heading">
+          <span class="hero__line"><span class="hero__line-inner">Begin Your</span></span>
+          <span class="hero__line"><span class="hero__line-inner">Legacy</span></span>
+        </h2>
+        <p class="cta__text">Every extraordinary space begins with a single conversation.</p>
+        <a href="mailto:hello@amvassociate.com" class="cta__button" data-hover>Schedule a Consultation</a>
+        <div class="cta__contact">
+          <a href="mailto:hello@amvassociate.com" class="cta__contact-item" data-hover>hello@amvassociate.com</a>
+          <a href="tel:+919999999999" class="cta__contact-item" data-hover>+91-XXXX-XXXXXX</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ Section 11: Footer ═══ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__col">
+          <p class="footer__brand-name">AMV Associate</p>
+          <p class="footer__brand-tagline">Architecture and interior design studio dedicated to crafting spaces that stand the test of time.</p>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__heading">Navigation</h4>
+          <a href="#projects" class="footer__link" data-hover>Projects</a>
+          <a href="#expertise" class="footer__link" data-hover>Expertise</a>
+          <a href="#process" class="footer__link" data-hover>Process</a>
+          <a href="#materials" class="footer__link" data-hover>Materials</a>
+          <a href="#insights" class="footer__link" data-hover>Insights</a>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__heading">Contact</h4>
+          <a href="mailto:hello@amvassociate.com" class="footer__link" data-hover>hello@amvassociate.com</a>
+          <a href="tel:+919999999999" class="footer__link" data-hover>+91-XXXX-XXXXXX</a>
+          <span class="footer__link">Mumbai, India</span>
+        </div>
+
+        <div class="footer__col">
+          <h4 class="footer__heading">Social</h4>
+          <a href="https://instagram.com" class="footer__link" data-hover target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://linkedin.com" class="footer__link" data-hover target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://pinterest.com" class="footer__link" data-hover target="_blank" rel="noopener noreferrer">Pinterest</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2025 AMV Associate. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="#" data-hover>Privacy Policy</a>
+          <a href="#" data-hover>Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ Scripts ═══ -->
+  <script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+
+  <!-- No-JS Fallback -->
+  <noscript>
+    <style>
+      .preloader { display: none !important; }
+      .cursor__dot, .cursor__ring { display: none !important; }
+      .hero__line-inner { transform: none !important; clip-path: none !important; }
+      .philosophy__char { opacity: 1 !important; }
+    </style>
+  </noscript>
+
+</body>
+</html>
