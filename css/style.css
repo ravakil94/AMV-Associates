@@ -140,7 +140,12 @@ button { background: none; border: none; cursor: pointer; color: inherit; font: 
   gap: 2.5rem;
 }
 .preloader__logo { width: clamp(120px, 20vw, 200px); }
-.preloader__logo-img { width: 100%; height: auto; }
+.preloader__logo-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  filter: brightness(1.1);
+}
 .preloader__track {
   width: clamp(120px, 20vw, 200px);
   height: 2px;
@@ -203,7 +208,14 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
   gap: 2rem;
 }
 .nav__logo { display: flex; align-items: center; }
-.nav__logo-img { height: 44px; width: auto; object-fit: contain; }
+.nav__logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  filter: brightness(1.1);
+  transition: height 0.3s ease, filter 0.3s ease;
+}
 .nav--scrolled .nav__logo-img { height: 36px; }
 
 .nav__links { display: none; align-items: center; gap: 2rem; }
@@ -756,14 +768,15 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
 .philosophy::after { bottom: 2rem; right: 2rem; border-width: 0 1px 1px 0; }
 .philosophy__quote {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  font-size: clamp(1.3rem, 3vw, 2.5rem);
   font-weight: 400;
   font-style: italic;
-  line-height: 1.4;
-  max-width: 900px;
+  line-height: 1.5;
+  max-width: 800px;
   margin: 0 auto 2rem;
+  text-align: center;
 }
-.philosophy__char { opacity: 0.15; transition: opacity 0.1s; }
+.philosophy__char { opacity: 0.12; transition: opacity 0.15s ease; }
 .philosophy__attribution {
   font-size: 0.85rem;
   color: var(--gold);
@@ -1018,7 +1031,13 @@ body.cursor--hidden .cursor__ring { opacity: 0; }
   gap: 2.5rem;
   margin-bottom: 3rem;
 }
-.footer__logo { height: 50px; width: auto; margin-bottom: 1rem; }
+.footer__logo {
+  height: 50px;
+  width: auto;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  filter: brightness(1.1);
+}
 .footer__tagline { font-size: 0.85rem; color: var(--slate); line-height: 1.7; max-width: 300px; }
 .footer__heading {
   font-family: 'Playfair Display', serif;
@@ -1160,7 +1179,7 @@ a.footer__link:hover { color: var(--gold); padding-left: 0.5rem; }
   .nav__cta { display: inline-flex; }
   .nav__hamburger { display: none; }
   .expertise__grid { grid-template-columns: repeat(4, 1fr); }
-  .team__grid { grid-template-columns: repeat(4, 1fr); }
+  .team__grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; margin: 0 auto; }
   .process__timeline { grid-template-columns: repeat(5, 1fr); gap: 0; }
   .process__line { display: block; }
   .footer__grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
