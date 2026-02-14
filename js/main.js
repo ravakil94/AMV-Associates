@@ -62,14 +62,12 @@
       moveRingY(e.clientY);
     });
 
-    // Hover detection
     const hoverTargets = document.querySelectorAll('a, button, [data-hover]');
     hoverTargets.forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor--hover'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor--hover'));
     });
 
-    // Hide when leaving window
     document.addEventListener('mouseleave', () => document.body.classList.add('cursor--hidden'));
     document.addEventListener('mouseenter', () => document.body.classList.remove('cursor--hidden'));
   }
@@ -83,7 +81,6 @@
 
     if (!nav) return;
 
-    // Scroll state
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
@@ -95,7 +92,6 @@
       lastScroll = y;
     }, { passive: true });
 
-    // Hamburger toggle
     if (hamburger) {
       hamburger.addEventListener('click', () => {
         const isOpen = nav.classList.toggle('nav--open');
@@ -105,7 +101,6 @@
       });
     }
 
-    // Close overlay on link click
     const closeNav = () => {
       nav.classList.remove('nav--open');
       hamburger?.setAttribute('aria-expanded', 'false');
@@ -115,7 +110,6 @@
 
     overlayLinks.forEach(link => link.addEventListener('click', closeNav));
 
-    // Smooth scroll for anchor links
     [...navLinks, ...overlayLinks, ...document.querySelectorAll('.hero__scroll, .footer__link[href^="#"]')].forEach(link => {
       link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
@@ -131,7 +125,6 @@
       });
     });
 
-    // Active link highlighting
     const sections = document.querySelectorAll('section[id]');
     if (sections.length && navLinks.length) {
       const observer = new IntersectionObserver(entries => {
@@ -164,28 +157,33 @@
   /* ── Hero Entrance ───────────────────────────────────────────── */
   function initHeroEntrance() {
     if (prefersReducedMotion) {
-      // Show everything immediately
       gsap.set('.hero__line-inner', { y: 0, clipPath: 'inset(0 0 0% 0)' });
-      gsap.set('.hero__subtitle, .hero__scroll, .nav', { opacity: 1 });
+      gsap.set('.hero__badge, .hero__subtitle, .hero__scroll, .nav', { opacity: 1 });
       return;
     }
 
     const tl = gsap.timeline();
 
-    // Set initial states
+    gsap.set('.hero__badge', { opacity: 0, y: -15, scale: 0.9 });
     gsap.set('.hero__line-inner', { y: 40, clipPath: 'inset(0 0 100% 0)' });
     gsap.set('.hero__subtitle', { opacity: 0, y: 20 });
     gsap.set('.hero__scroll', { opacity: 0 });
     gsap.set('.nav', { opacity: 0 });
 
-    // Animate
-    tl.to('.hero__line-inner', {
+    tl.to('.hero__badge', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.6,
+      ease: 'back.out(1.7)'
+    })
+    .to('.hero__line-inner', {
       y: 0,
       clipPath: 'inset(0 0 0% 0)',
       duration: 0.9,
       ease: 'power4.out',
       stagger: 0.15
-    })
+    }, '-=0.3')
     .to('.hero__subtitle', {
       opacity: 1,
       y: 0,
@@ -239,23 +237,25 @@
       });
     }
 
-    // Project cards
+    // Project cards — staggered with 3D tilt entrance
     gsap.utils.toArray('.project-card').forEach((card, i) => {
       gsap.from(card, {
         scrollTrigger: {
           trigger: card,
-          start: 'top 85%',
+          start: 'top 88%',
           toggleActions: 'play none none reverse'
         },
-        scale: 0.95,
+        scale: 0.92,
         opacity: 0,
-        duration: 0.8,
-        delay: i * 0.15,
+        rotationY: i % 2 === 0 ? -5 : 5,
+        transformOrigin: i % 2 === 0 ? 'left center' : 'right center',
+        duration: 0.9,
+        delay: (i % 4) * 0.12,
         ease: 'power3.out'
       });
     });
 
-    // Expertise cards
+    // Expertise cards — staggered slide-up with rotation
     gsap.utils.toArray('.expertise-card').forEach((card, i) => {
       gsap.from(card, {
         scrollTrigger: {
@@ -263,9 +263,11 @@
           start: 'top 85%',
           toggleActions: 'play none none reverse'
         },
-        y: 40,
+        y: 50,
         opacity: 0,
-        duration: 0.7,
+        rotationX: 8,
+        transformOrigin: 'bottom center',
+        duration: 0.8,
         delay: i * 0.1,
         ease: 'power3.out'
       });
@@ -313,8 +315,6 @@
       });
 
       processSteps.forEach((step, i) => {
-        const num = step.querySelector('.process__number');
-
         gsap.from(step, {
           scrollTrigger: {
             trigger: step,
@@ -328,7 +328,6 @@
           ease: 'power3.out'
         });
 
-        // Fill number circle on scroll
         ScrollTrigger.create({
           trigger: step,
           start: 'top 65%',
@@ -338,39 +337,89 @@
       });
     }
 
-    // Material swatches
-    gsap.utils.toArray('.material-card').forEach((card, i) => {
+    // Testimonials — staggered with slide-up and scale
+    gsap.utils.toArray('.testimonial-card').forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 88%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 60,
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.8,
+        delay: i * 0.15,
+        ease: 'power3.out'
+      });
+    });
+
+    // Team cards — staggered reveal with clip-path wipe
+    gsap.utils.toArray('.team-card').forEach((card, i) => {
       gsap.from(card, {
         scrollTrigger: {
           trigger: card,
           start: 'top 85%',
           toggleActions: 'play none none reverse'
         },
-        scale: 0.9,
+        clipPath: 'inset(100% 0 0 0)',
         opacity: 0,
-        duration: 0.7,
-        delay: i * 0.1,
-        ease: 'power3.out'
+        duration: 0.9,
+        delay: i * 0.15,
+        ease: 'power4.out'
       });
+
+      // Animate the image separately for a layered effect
+      const img = card.querySelector('.team-card__image');
+      if (img) {
+        gsap.from(img, {
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          },
+          scale: 1.15,
+          duration: 1.2,
+          delay: i * 0.15 + 0.2,
+          ease: 'power2.out'
+        });
+      }
     });
 
-    // Insight cards
-    gsap.utils.toArray('.insight-card').forEach((card, i) => {
-      gsap.from(card, {
+    // Client logos — cascading fade-in
+    gsap.utils.toArray('.recognition__clients-logos img').forEach((logo, i) => {
+      gsap.from(logo, {
         scrollTrigger: {
-          trigger: card,
+          trigger: '.recognition__clients-logos',
           start: 'top 85%',
           toggleActions: 'play none none reverse'
         },
-        y: 40,
         opacity: 0,
-        duration: 0.7,
-        delay: i * 0.12,
-        ease: 'power3.out'
+        scale: 0.8,
+        y: 20,
+        duration: 0.5,
+        delay: i * 0.04,
+        ease: 'power2.out'
       });
     });
 
-    // CTA heading — line reveal (reuses hero line structure)
+    // Recognition label
+    const clientsLabel = document.querySelector('.recognition__clients-label');
+    if (clientsLabel) {
+      gsap.from(clientsLabel, {
+        scrollTrigger: {
+          trigger: clientsLabel,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        ease: 'power3.out'
+      });
+    }
+
+    // CTA heading — line reveal
     const ctaLines = document.querySelectorAll('.cta .hero__line-inner');
     if (ctaLines.length) {
       gsap.from(ctaLines, {
@@ -436,7 +485,6 @@
     const content = document.querySelector('.marquee__content');
     if (!marquee || !content) return;
 
-    // Clone content for seamless loop
     const clone = content.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
     marquee.appendChild(clone);
@@ -470,7 +518,6 @@
 
     initPreloader(() => {
       initHeroEntrance();
-      // Small delay to ensure GSAP + ScrollTrigger ready
       requestAnimationFrame(() => {
         initScrollAnimations();
         initParallax();
@@ -479,7 +526,6 @@
     });
   }
 
-  // Wait for DOM + external scripts
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
